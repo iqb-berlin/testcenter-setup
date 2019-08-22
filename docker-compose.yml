@@ -1,22 +1,36 @@
 version: '3.7'
 
+x-env-mysql: &env-mysql
+  MYSQL_DATABASE: test_db
+  MYSQL_USER: devuser
+  MYSQL_PASSWORD: devpass
+
 services:
+
   db:
     image: mysql:5.7
     environment:
+      <<: *env-mysql
       MYSQL_ROOT_PASSWORD: my_secret_pw_shh
-      MYSQL_DATABASE: test_db
-      MYSQL_USER: devuser
-      MYSQL_PASSWORD: devpass
     ports:
       - "9906:3306"
+
   testcenter-iqb-php:
-    image: testcenter-iqb-php
+    build:
+      context: ./testcenter-iqb-php
+      args:
+        a: 1
     container_name: testcenter-iqb-php
+    environment:
+      <<: *env-mysql
+      SUPERUSER_NAME: super
+      SUPERUSER_PASSWORD: user123
+      MYSQL_HOST: localhost
+      MYSQL_PORT: 9906
     depends_on:
       - db
     volumes:
-      - ./php/:/var/www/html/
+      - ./testcenter-iqb-php/src/:/var/www/html/
     ports:
       - "8100:80"
     stdin_open: true
