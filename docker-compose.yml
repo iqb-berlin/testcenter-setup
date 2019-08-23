@@ -1,37 +1,40 @@
 version: '3.7'
 
 x-env-mysql: &env-mysql
-  MYSQL_DATABASE: test_db
-  MYSQL_USER: devuser
-  MYSQL_PASSWORD: devpass
+  MYSQL_DATABASE: iqb_tba_textcenter
+  MYSQL_USER: iqb_tba_db_user
+  MYSQL_PASSWORD: iqb_tba_db_password
+
+x-env-superuser: &env-superuser
+  SUPERUSER_NAME: super
+  SUPERUSER_PASSWORD: user123
 
 services:
 
-  db:
-    image: mysql:5.7
+  testcenter-iqb-db:
+    build:
+      context: testcenter-iqb-db
     environment:
       <<: *env-mysql
-      MYSQL_ROOT_PASSWORD: my_secret_pw_shh
+      <<: *env-superuser
+      MYSQL_ROOT_PASSWORD: secret_root_pw
     ports:
-      - "9906:3306"
+      - "9091:3306"
 
   testcenter-iqb-php:
     build:
       context: ./testcenter-iqb-php
-      args:
-        a: 1
     container_name: testcenter-iqb-php
     environment:
       <<: *env-mysql
-      SUPERUSER_NAME: super
-      SUPERUSER_PASSWORD: user123
-      MYSQL_HOST: localhost
-      MYSQL_PORT: 9906
+      <<: *env-superuser
+      MYSQL_HOST: testcenter-iqb-db
+      MYSQL_PORT: 3306
     depends_on:
-      - db
+      - testcenter-iqb-db
     volumes:
       - ./testcenter-iqb-php/src/:/var/www/html/
     ports:
-      - "8100:80"
+      - "9090:80"
     stdin_open: true
     tty: true
