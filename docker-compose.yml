@@ -18,6 +18,9 @@ services:
       <<: *env-mysql
       <<: *env-superuser
       MYSQL_ROOT_PASSWORD: secret_root_pw
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./testcenter-iqb-db/config/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - "9091:3306"
 
@@ -33,8 +36,14 @@ services:
     depends_on:
       - testcenter-iqb-db
     volumes:
-      - ./testcenter-iqb-php/src/:/var/www/html/
+      - ${PWD}/testcenter-iqb-php/src/:/var/www/html/
+      - ${PWD}/testcenter-iqb-php/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ${PWD}/testcenter-iqb-php/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
     ports:
       - "9090:80"
     stdin_open: true
     tty: true
+
+volumes:
+  dbdata:
+    driver: local
