@@ -14,6 +14,7 @@ services:
   testcenter-iqb-db:
     build:
       context: testcenter-iqb-db
+    container_name: testcenter-db
     environment:
       <<: *env-mysql
       <<: *env-superuser
@@ -27,7 +28,7 @@ services:
   testcenter-iqb-php:
     build:
       context: ./testcenter-iqb-php
-    container_name: testcenter-iqb-php
+    container_name: testcenter-backend
     environment:
       <<: *env-mysql
       <<: *env-superuser
@@ -36,13 +37,28 @@ services:
     depends_on:
       - testcenter-iqb-db
     volumes:
-      - ${PWD}/testcenter-iqb-php/src/:/var/www/html/
-      - ${PWD}/testcenter-iqb-php/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
-      - ${PWD}/testcenter-iqb-php/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
+      - ./testcenter-iqb-php/src/:/var/www/html/
+      - ./testcenter-iqb-php/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./testcenter-iqb-php/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
     ports:
       - "9090:80"
     stdin_open: true
     tty: true
+
+  testcenter-admin-iqb-ng:
+    build:
+      context: ./testcenter-admin-iqb-ng
+    container_name: testcenter-admin-frontend
+    volumes:
+      - ./testcenter-admin-iqb-ng/src/src:/app/src
+      - ./testcenter-admin-iqb-ng/src/package.json:/app/src/package.json
+      - ./testcenter-admin-iqb-ng/src/angular.json:/app/src/angular.json
+      - ./testcenter-admin-iqb-ng/src/tsconfig.json:/app/src/tsconfig.json
+      - /app/node_modules
+      - ./testcenter-admin-iqb-ng/config/environment/environment.ts:/app/src/environments/environment.ts
+    ports:
+      - '4203:4200'
+
 
 volumes:
   dbdata:

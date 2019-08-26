@@ -1,3 +1,6 @@
 [submodule "testcenter-iqb-php"]
 	path = testcenter-iqb-php/src
 	url = https://github.com/iqb-berlin/testcenter-iqb-php
+[submodule "testcenter-admin-iqb-ng/src"]
+	path = testcenter-admin-iqb-ng/src
+	url = https://github.com/iqb-berlin/testcenter-admin-iqb-ng.git
