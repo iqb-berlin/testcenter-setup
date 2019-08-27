@@ -54,12 +54,29 @@ services:
       - ./testcenter-admin-iqb-ng/src/package.json:/app/src/package.json
       - ./testcenter-admin-iqb-ng/src/angular.json:/app/src/angular.json
       - ./testcenter-admin-iqb-ng/src/tsconfig.json:/app/src/tsconfig.json
-      - /app/node_modules
-      - ./testcenter-admin-iqb-ng/config/environment/environment.ts:/app/src/environments/environment.ts
+      - node_modules_testcenter_admin:/app/node_modules
+      - ./testcenter-admin-iqb-ng/config/environment.ts:/app/src/environments/environment.ts
     ports:
       - '4203:4200'
 
+  testcenter-iqb-ng:
+    build:
+      context: ./testcenter-iqb-ng
+    container_name: testcenter-frontend
+    volumes:
+      - ./testcenter-iqb-ng/src/src:/app/src
+      - ./testcenter-iqb-ng/src/package.json:/app/src/package.json
+      - ./testcenter-iqb-ng/src/angular.json:/app/src/angular.json
+      - ./testcenter-iqb-ng/src/tsconfig.json:/app/src/tsconfig.json
+      - node_modules_testcenter:/app/node_modules
+      - ./testcenter-iqb-ng/config/environment.ts:/app/src/environments/environment.ts
+    ports:
+      - '4201:4200'
 
 volumes:
   dbdata:
+    driver: local
+  node_modules_testcenter_admin:
+    driver: local
+  node_modules_testcenter:
     driver: local

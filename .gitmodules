@@ -4,3 +4,6 @@
 [submodule "testcenter-admin-iqb-ng/src"]
 	path = testcenter-admin-iqb-ng/src
 	url = https://github.com/iqb-berlin/testcenter-admin-iqb-ng.git
+[submodule "testcenter-iqb-ng/src"]
+	path = testcenter-iqb-ng/src
+	url = https://github.com/iqb-berlin/testcenter-iqb-ng.git
