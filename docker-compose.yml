@@ -5,9 +5,12 @@ x-env-mysql: &env-mysql
   MYSQL_USER: iqb_tba_db_user
   MYSQL_PASSWORD: iqb_tba_db_password
 
-x-env-superuser: &env-superuser
+x-env-initdata: &env-initdata
   SUPERUSER_NAME: super
   SUPERUSER_PASSWORD: user123
+  WORKSPACE_NAME: example_workspace
+  TEST_LOGIN_NAME: test
+  TEST_LOGIN_PASSWORD: user123
 
 services:
 
@@ -17,7 +20,6 @@ services:
     container_name: testcenter-db
     environment:
       <<: *env-mysql
-      <<: *env-superuser
       MYSQL_ROOT_PASSWORD: secret_root_pw
     volumes:
       - dbdata:/var/lib/mysql
@@ -31,7 +33,7 @@ services:
     container_name: testcenter-backend
     environment:
       <<: *env-mysql
-      <<: *env-superuser
+      <<: *env-initdata
       MYSQL_HOST: testcenter-iqb-db
       MYSQL_PORT: 3306
     depends_on:

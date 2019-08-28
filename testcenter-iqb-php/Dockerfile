@@ -8,6 +8,9 @@ LABEL license="MIT"
 # environment vars
 ENV SUPERUSER_NAME=super
 ENV SUPERUSER_PASSWORD=user456
+ENV TEST_LOGIN_NAME=testlogin
+ENV TEST_LOGIN_PASSWORD=user789
+ENV WORKSPACE_NAME=brand_new_workspace
 ENV MYSQL_DATABASE=iqb_tba_textcenter_1
 ENV MYSQL_USER=iqb_tba_db_user_1
 ENV MYSQL_PASSWORD=iqb_tba_db_password_1
