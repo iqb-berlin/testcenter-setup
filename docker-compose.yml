@@ -42,6 +42,7 @@ services:
       - ./testcenter-iqb-php/src/:/var/www/html/
       - ./testcenter-iqb-php/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./testcenter-iqb-php/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
+      - ./testcenter-iqb-php/data:/var/www/html/vo_data
     ports:
       - "9090:80"
     stdin_open: true
