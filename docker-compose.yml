@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-env-mysql: &env-mysql
-  MYSQL_DATABASE: iqb_tba_textcenter
+  MYSQL_DATABASE: iqb_tba_testcenter
   MYSQL_USER: iqb_tba_db_user
   MYSQL_PASSWORD: iqb_tba_db_password
 
@@ -14,65 +14,65 @@ x-env-initdata: &env-initdata
 
 services:
 
-  testcenter-iqb-db:
+  testcenter-db:
     build:
-      context: testcenter-iqb-db
+      context: testcenter-db
     container_name: testcenter-db
     environment:
       <<: *env-mysql
       MYSQL_ROOT_PASSWORD: secret_root_pw
     volumes:
       - dbdata:/var/lib/mysql
-      - ./testcenter-iqb-db/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./testcenter-db/config/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - "9091:3306"
 
-  testcenter-iqb-php:
+  testcenter-backend:
     build:
-      context: ./testcenter-iqb-php
+      context: testcenter-backend
     container_name: testcenter-backend
     environment:
       <<: *env-mysql
       <<: *env-initdata
-      MYSQL_HOST: testcenter-iqb-db
+      MYSQL_HOST: testcenter-db
       MYSQL_PORT: 3306
     depends_on:
-      - testcenter-iqb-db
+      - testcenter-db
     volumes:
-      - ./testcenter-iqb-php/src/:/var/www/html/
-      - ./testcenter-iqb-php/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
-      - ./testcenter-iqb-php/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
-      - ./testcenter-iqb-php/data:/var/www/html/vo_data
+      - ./testcenter-backend/src/:/var/www/html/
+      - ./testcenter-backend/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./testcenter-backend/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
+      - ./testcenter-backend/data:/var/www/html/vo_data
     ports:
       - "9090:80"
     stdin_open: true
     tty: true
 
-  testcenter-admin-iqb-ng:
+  testcenter-admin-frontend:
     build:
-      context: ./testcenter-admin-iqb-ng
+      context: testcenter-admin-frontend
     container_name: testcenter-admin-frontend
     volumes:
-      - ./testcenter-admin-iqb-ng/src/src:/app/src
-      - ./testcenter-admin-iqb-ng/src/package.json:/app/src/package.json
-      - ./testcenter-admin-iqb-ng/src/angular.json:/app/src/angular.json
-      - ./testcenter-admin-iqb-ng/src/tsconfig.json:/app/src/tsconfig.json
+      - ./testcenter-admin-frontend/src/src:/app/src
+      - ./testcenter-admin-frontend/src/package.json:/app/src/package.json
+      - ./testcenter-admin-frontend/src/angular.json:/app/src/angular.json
+      - ./testcenter-admin-frontend/src/tsconfig.json:/app/src/tsconfig.json
       - node_modules_testcenter_admin:/app/node_modules
-      - ./testcenter-admin-iqb-ng/config/environment.ts:/app/src/environments/environment.ts
+      - ./testcenter-admin-frontend/config/environment.ts:/app/src/environments/environment.ts
     ports:
       - '4203:4200'
 
-  testcenter-iqb-ng:
+  testcenter-frontend:
     build:
-      context: ./testcenter-iqb-ng
+      context: testcenter-frontend
     container_name: testcenter-frontend
     volumes:
-      - ./testcenter-iqb-ng/src/src:/app/src
-      - ./testcenter-iqb-ng/src/package.json:/app/src/package.json
-      - ./testcenter-iqb-ng/src/angular.json:/app/src/angular.json
-      - ./testcenter-iqb-ng/src/tsconfig.json:/app/src/tsconfig.json
+      - ./testcenter-frontend/src/src:/app/src
+      - ./testcenter-frontend/src/package.json:/app/src/package.json
+      - ./testcenter-frontend/src/angular.json:/app/src/angular.json
+      - ./testcenter-frontend/src/tsconfig.json:/app/src/tsconfig.json
       - node_modules_testcenter:/app/node_modules
-      - ./testcenter-iqb-ng/config/environment.ts:/app/src/environments/environment.ts
+      - ./testcenter-frontend/config/environment.ts:/app/src/environments/environment.ts
     ports:
       - '4201:4200'
 

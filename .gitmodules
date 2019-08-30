@@ -1,9 +1,9 @@
 [submodule "testcenter-iqb-php"]
-	path = testcenter-iqb-php/src
+	path = testcenter-backend/src
 	url = https://github.com/iqb-berlin/testcenter-iqb-php
 [submodule "testcenter-admin-iqb-ng/src"]
-	path = testcenter-admin-iqb-ng/src
+	path = testcenter-admin-frontend/src
 	url = https://github.com/iqb-berlin/testcenter-admin-iqb-ng.git
 [submodule "testcenter-iqb-ng/src"]
-	path = testcenter-iqb-ng/src
+	path = testcenter-frontend/src
 	url = https://github.com/iqb-berlin/testcenter-iqb-ng.git
