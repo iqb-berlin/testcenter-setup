@@ -20,7 +20,7 @@ RUN npm install --save-dev
 COPY ./src /app
 
 # add config
-COPY ./config/environment.ts /app/src/environments
+RUN sed -i -E "s/testcenterUrl:\s?['\"](.*?)['\"]/testcenterUrl:'http:\/\/localhost:9090\/'/" /app/src/environments/environment.ts
 
 # start app
 CMD ng serve --host 0.0.0.0
