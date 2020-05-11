@@ -65,7 +65,5 @@ services:
 volumes:
   dbdata:
     driver: local
-  node_modules_testcenter_admin:
-    driver: local
   node_modules_testcenter:
     driver: local

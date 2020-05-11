@@ -1,5 +1,5 @@
 # base image
-FROM node:10.16.3
+FROM node:13.14.0
 
 # install chrome for protractor tests
 #RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -14,8 +14,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY ./src/package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@7.3.9
+RUN npm install --save-dev
 
 # add app
 COPY ./src /app
