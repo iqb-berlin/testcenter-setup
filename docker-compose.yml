@@ -48,20 +48,6 @@ services:
     stdin_open: true
     tty: true
 
-  testcenter-admin-frontend:
-    build:
-      context: testcenter-admin-frontend
-    container_name: testcenter-admin-frontend
-    volumes:
-      - ./testcenter-admin-frontend/src/src:/app/src
-      - ./testcenter-admin-frontend/src/package.json:/app/src/package.json
-      - ./testcenter-admin-frontend/src/angular.json:/app/src/angular.json
-      - ./testcenter-admin-frontend/src/tsconfig.json:/app/src/tsconfig.json
-      - node_modules_testcenter_admin:/app/node_modules
-      - ./testcenter-admin-frontend/config/environment.ts:/app/src/environments/environment.ts
-    ports:
-      - '4203:4200'
-
   testcenter-frontend:
     build:
       context: testcenter-frontend
