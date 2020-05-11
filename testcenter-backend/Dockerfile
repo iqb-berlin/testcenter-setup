@@ -17,8 +17,12 @@ ENV MYSQL_PASSWORD=iqb_tba_db_password_1
 ENV MYSQL_PORT=3306
 ENV MYSQL_HOST=127.0.0.1
 
+# dependencies, needed for composer
+RUN apt-get update && \
+    apt-get install -y wget zlib1g-dev libzip-dev unzip
+
 # install php extensions
-RUN docker-php-ext-install -j$(nproc) pdo_mysql
+RUN docker-php-ext-install -j$(nproc) pdo_mysql zip
 
 # set up apache
 RUN a2enmod rewrite
