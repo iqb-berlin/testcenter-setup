@@ -12,15 +12,15 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
-# install and cache app dependencies
-COPY ./src/package.json /app/package.json
-RUN npm install --save-dev
-
 # add app
 COPY ./src /app
 
-# add config
-RUN sed -i -E "s/testcenterUrl:\s?['\"](.*?)['\"]/testcenterUrl:'http:\/\/localhost:9090\/'/" /app/src/environments/environment.ts
+# install dependencies
+RUN npm install --save-dev --loglevel=error
+RUN ls node_modules
+
 
 # start app
-CMD ng serve --host 0.0.0.0
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod 777 /root/entrypoint.sh
+ENTRYPOINT ["/root/entrypoint.sh"]

@@ -43,6 +43,7 @@ services:
       - ./testcenter-backend/config/local.php.ini:/usr/local/etc/php/conf.d/local.ini
       - ./testcenter-backend/config/vhost.conf:/etc/apache2/sites-available/vhost.conf
       - ./testcenter-backend/data:/var/www/html/vo_data
+      - vendor_backend:/var/www/html/vendor
     ports:
       - "9090:80"
     stdin_open: true
@@ -53,12 +54,8 @@ services:
       context: testcenter-frontend
     container_name: testcenter-frontend
     volumes:
-      - ./testcenter-frontend/src/src:/app/src
-      - ./testcenter-frontend/src/package.json:/app/src/package.json
-      - ./testcenter-frontend/src/angular.json:/app/src/angular.json
-      - ./testcenter-frontend/src/tsconfig.json:/app/src/tsconfig.json
+      - ./testcenter-frontend/src:/app
       - node_modules_testcenter:/app/node_modules
-      - ./testcenter-frontend/config/environment.ts:/app/src/environments/environment.ts
     ports:
       - '4201:4200'
 
@@ -66,4 +63,6 @@ volumes:
   dbdata:
     driver: local
   node_modules_testcenter:
+    driver: local
+  vendor_backend:
     driver: local
