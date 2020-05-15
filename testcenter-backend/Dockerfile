@@ -42,6 +42,11 @@ COPY src/ /var/www/html
 # set file rights
 RUN chown -R www-data:www-data /var/www/html
 
+# install composer dependencies
+RUN sh scripts/install_composer.sh
+RUN php composer.phar install
+
+
 EXPOSE 80
 
 COPY entrypoint.sh /root/entrypoint.sh

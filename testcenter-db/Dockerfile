@@ -15,4 +15,4 @@ ENV MYSQL_INITDB_SKIP_TZINFO=true
 COPY config/my.cnf /etc/mysql/conf.d/my.cnf
 
 # import database and createsuperuser script
-COPY src/db.mysql.sql /docker-entrypoint-initdb.d/1-db.mysql.sql
+#COPY src/db.mysql.sql /docker-entrypoint-initdb.d/1-db.mysql.sql
