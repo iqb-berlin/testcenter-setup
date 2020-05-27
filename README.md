@@ -1,7 +1,7 @@
 # iqb-tba-docker-setup
-dockerize(testcenter + testcenter admin + backends)
+Dockerized version of IQB Testcenter with Frontend and Backend plus Database.
 
-This compose-file is for development/showcase purposes. not for deployment.
+**This compose-file is for development/showcase purposes. Not for deployment.**
 
 # run
 
@@ -21,6 +21,5 @@ timeout: `export COMPOSE_HTTP_TIMEOUT=300`.
 # ports:services
 
 - 4201: testcenter
-- 4203: testcenter admin
 - 9090: php backend(s)
 - 9091: mysql database
