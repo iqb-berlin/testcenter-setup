@@ -1,5 +1,7 @@
-# iqb-tba-docker-setup
-Dockerized version of IQB Testcenter with Frontend and Backend plus Database.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+# Testcenter
+(Docker-)Setup for the Testcenter Application
 
 **This compose-file is for development/showcase purposes. Not for deployment.**
 
