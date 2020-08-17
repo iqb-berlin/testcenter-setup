@@ -1,6 +1,6 @@
 [submodule "testcenter-iqb-php"]
-	path = testcenter-backend_new
+	path = testcenter-backend
 	url = https://github.com/iqb-berlin/testcenter-iqb-php
 [submodule "testcenter-iqb-ng/src"]
-	path = testcenter-frontend_new
+	path = testcenter-frontend
 	url = https://github.com/iqb-berlin/testcenter-iqb-ng.git
