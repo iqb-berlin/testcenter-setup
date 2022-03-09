@@ -26,14 +26,14 @@ services:
       - "./letsencrypt:/letsencrypt"
 
   testcenter-backend:
-    image: iqbberlin/testcenter-backend:12.0.2
+    image: iqbberlin/testcenter-backend:12.2.1
     volumes:
       - testcenter_backend_vo_data:/var/www/html/vo_data
     labels:
       - "traefik.http.routers.testcenter-backend.tls=true"
 
   testcenter-frontend:
-    image: iqbberlin/testcenter-frontend:12.0.3
+    image: iqbberlin/testcenter-frontend:12.1.0
     labels:
       - "traefik.http.routers.testcenter-frontend.tls=true"
 
