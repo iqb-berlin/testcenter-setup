@@ -149,7 +149,7 @@ def _undo_version_update_in_compose_files():
 
 
 check_prerequisites()
-update_submodules()
+# update_submodules()
 backend_version = get_version_from_file(BACKEND_VERSION_FILE_PATH, BACKEND_VERSION_REGEX)
 frontend_version = get_version_from_file(FRONTEND_VERSION_FILE_PATH, FRONTEND_VERSION_REGEX)
 bs_version = get_version_from_file(BS_VERSION_FILE_PATH, BS_VERSION_REGEX)
