@@ -1,5 +1,9 @@
 #Changelog
 
+## Backend 12.4.1
+* Update PHP from 7.4.22 to 7.4.29 and Apache to 2.4.53
+
+
 ## Backend 12.4.0
 ### New Feature: so-called resource-packages.
 Uploaded zip files with the extension .itcr.zip - resource-packages - now get a special treatment:
