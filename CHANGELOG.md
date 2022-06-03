@@ -1,5 +1,11 @@
 #Changelog
 
+## Frontend 12.1.9
+* Update NGINX version (1.22.0)
+
+## Backend 12.4.2
+* radically speed up initialization and tests and fix workspace loading issues
+
 ## Backend 12.4.1
 * Update PHP from 7.4.22 to 7.4.29 and Apache to 2.4.53
 
