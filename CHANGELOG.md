@@ -1,5 +1,11 @@
 #Changelog
 
+## Frontend 12.1.11
+* Fix cache-related problems which occurred after update II
+
+## Frontend 12.1.10
+* Fix cache-related problems which occurred after update I
+
 ## Frontend 12.1.9
 * Update NGINX version (1.22.0)
 
